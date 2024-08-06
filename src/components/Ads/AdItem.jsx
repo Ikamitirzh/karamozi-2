@@ -1,5 +1,6 @@
 import  { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const AdItem = ({ ad }) => {
   const [comment, setComment] = useState('');
@@ -25,19 +26,24 @@ const AdItem = ({ ad }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4">
-      <h3 className="text-xl font-bold mb-2">{ad.title}</h3>
-      <p className="mb-2">{ad.description}</p>
-      <p className="mb-2">قیمت: {ad.price} تومان</p>
-      <p className="mb-2">تخفیف: {ad.discount}%</p>
-      <p className="mb-2">زمان تحویل: {ad.deliveryTime}</p>
-      <p className="mb-2">امتیاز: {ad.rating}</p>
-      <div className="mt-4">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200">
+      <div className="relative">
+        <img src={`https://via.placeholder.com/300x200?text=${ad.title}`} alt={ad.title} className="w-full h-40 object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
+        <div className="absolute inset-0 flex items-end p-4">
+          <div>
+            <h2 className="text-2xl font-bold text-white mb-2">{ad.title}</h2>
+            <p className="text-gray-300 mb-2">قیمت: {ad.price} تومان</p>
+            <Link to={`/ad/${ad.id}`} className="text-blue-300 hover:underline">جزئیات</Link>
+          </div>
+        </div>
+      </div>
+      <div className="p-4">
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="نظر خود را بنویسید"
-          className="w-full px-3 py-2 border border-gray-300 rounded-md mb-2"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md mb-4"
         />
         <button
           onClick={handleAddComment}
@@ -52,7 +58,7 @@ const AdItem = ({ ad }) => {
             onChange={(e) => setRating(Number(e.target.value))}
             min="1"
             max="5"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md mb-2"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md mb-4"
           />
           <button
             onClick={handleRateAd}

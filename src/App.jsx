@@ -9,6 +9,7 @@ import Profile from './components/Profile/Profile';
 import Requests from './components/Profile/Requests';
 import Home from './components/Home';
 import Header from './components/Header';
+import AdDetails from './components/Ads/AdDetails';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/requests" element={<Requests />} />
+        <Route path="/ad/:id" element={<AdDetails />} />
+        
       </Routes>
     </Router>
   );
